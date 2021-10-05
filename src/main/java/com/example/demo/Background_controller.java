@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
-public class Bakground_controller implements Initializable {
+public class Background_controller implements Initializable {
     @FXML
     private Button DeleteButton;
 
@@ -50,7 +50,7 @@ public class Bakground_controller implements Initializable {
     private Label myLabel;
 
     @FXML
-    private TextField seacrField;
+    private TextField searchField;
 
     @FXML
     private ImageView searchView;
@@ -68,7 +68,7 @@ public class Bakground_controller implements Initializable {
     private final DictionaryManagement dictionaryManagement =dictionaryCommandline.getDictionaryManagement();
     private final Dictionary newDictionary = dictionaryManagement.getDictionary();
     private final List<Word> newWords = newDictionary.getWords();
-    String cuurentWord;
+    String currentWord;
 
     public void HandleImage(MouseEvent e){
         System.out.println("Click the image");
@@ -76,7 +76,7 @@ public class Bakground_controller implements Initializable {
 
     // make a box to search word
     public void submit(ActionEvent e){
-        input = seacrField.getText();
+        input = searchField.getText();
         try {
             dictionaryCommandline.clear_SearchList();
             DictionaryList.getItems().clear();
@@ -89,8 +89,8 @@ public class Bakground_controller implements Initializable {
                 @Override
                 public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
                     int index = DictionaryList.getSelectionModel().getSelectedIndex();
-                    cuurentWord = searchWordList.get(index).getWord_target() + "\n" + searchWordList.get(index).getWord_explain();
-                    myLabel.setText(cuurentWord);
+                    currentWord = searchWordList.get(index).getWord_target() + "\n" + searchWordList.get(index).getWord_explain();
+                    myLabel.setText(currentWord);
                 }
             });
         }
@@ -114,8 +114,8 @@ public class Bakground_controller implements Initializable {
                     @Override
                     public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
                         int index = DictionaryList.getSelectionModel().getSelectedIndex();
-                        cuurentWord = newWords.get(index).getWord_target() + "\n" + newWords.get(index).getWord_explain();
-                        myLabel.setText(cuurentWord);
+                        currentWord = newWords.get(index).getWord_target() + "\n" + newWords.get(index).getWord_explain();
+                        myLabel.setText(currentWord);
                     }
                 });
             }
