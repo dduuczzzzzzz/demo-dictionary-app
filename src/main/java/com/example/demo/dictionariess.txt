@@ -1,0 +1,8 @@
+Hello	Xin chao
+Bye	Tam biet
+Dog	Cho
+Cat	Meo
+Thanks	Cam on
+Translate	Dich
+Transport 	Phuong tien
+Transform	Bien hinh
