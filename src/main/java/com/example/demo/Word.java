@@ -4,7 +4,6 @@ public class Word {
     private String word_target;
     private String word_explain;
 
-
     public void setWord_target(String word_target) {
         this.word_target = word_target;
     }
