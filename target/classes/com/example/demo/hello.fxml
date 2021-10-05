@@ -33,7 +33,7 @@
                   <Font size="17.0" />
                </font>
             </Label>
-            <Button fx:id="SoundButton" layoutX="392.0" layoutY="30.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="35.0" style="-fx-background-color: #ffebcd;">
+            <Button fx:id="SoundButton" layoutX="392.0" layoutY="30.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="35.0" stylesheets="@button2.css">
                <graphic>
                   <ImageView fitHeight="38.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -42,16 +42,16 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="EditButton" layoutX="462.0" layoutY="29.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="52.0" style="-fx-background-color: #ffebcd;">
+            <Button fx:id="EditButton" layoutX="462.0" layoutY="29.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="52.0" stylesheets="@button2.css">
                <graphic>
-                  <ImageView fx:id="editView" fitHeight="50.0" fitWidth="35.0" onMouseClicked="#HandleImage" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="editView" fitHeight="37.0" fitWidth="37.0" onMouseClicked="#HandleImage" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@image/edit.png" />
                      </image>
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="DeleteButton" layoutX="518.0" layoutY="29.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="52.0" style="-fx-background-color: #ffebcd;">
+            <Button fx:id="DeleteButton" layoutX="518.0" layoutY="29.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="52.0" stylesheets="@button2.css">
                <graphic>
                   <ImageView fitHeight="35.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
                      <image>
