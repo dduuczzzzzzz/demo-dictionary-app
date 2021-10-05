@@ -62,28 +62,26 @@
             </Button>
          </children>
       </AnchorPane>
-      <AnchorPane prefHeight="66.0" prefWidth="600.0" style="-fx-background-color: #808080;">
+      <AnchorPane prefHeight="74.0" prefWidth="600.0" style="-fx-background-color: #808080;">
          <children>
-            <Label layoutX="14.0" layoutY="33.0" prefHeight="41.0" prefWidth="89.0" text="Search" textFill="WHITE">
-               <font>
-                  <Font size="28.0" />
-               </font>
-            </Label>
             <Label layoutX="388.0" layoutY="10.0" text="Meow Teams" textFill="WHITE">
                <font>
                   <Font size="31.0" />
                </font>
             </Label>
-            <Button fx:id="SearchButton" layoutX="97.0" layoutY="33.0" mnemonicParsing="false" onAction="#submit" prefHeight="36.0" prefWidth="35.0" style="-fx-background-color: #808080;">
+            <Button fx:id="SearchButton" contentDisplay="RIGHT" layoutX="14.0" layoutY="23.0" mnemonicParsing="false" onAction="#submit" prefHeight="46.0" prefWidth="117.0" stylesheets="@button1.css" text="Search" textFill="WHITE">
                <graphic>
-                  <ImageView fx:id="searchView" fitHeight="27.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="searchView" fitHeight="26.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="file:/E:/javaproject/demo/src/main/java/com/example/demo/image/search.png" />
                      </image>
                   </ImageView>
                </graphic>
+               <font>
+                  <Font size="20.0" />
+               </font>
             </Button>
-            <Button fx:id="addButton" layoutX="157.0" layoutY="33.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="35.0" style="-fx-background-color: #808080;">
+            <Button fx:id="addButton" layoutX="155.0" layoutY="28.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="35.0" stylesheets="@button1.css">
                <graphic>
                   <ImageView fx:id="addView" fitHeight="28.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -92,7 +90,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="starButton" layoutX="218.0" layoutY="33.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="35.0" style="-fx-background-color: #808080;">
+            <Button fx:id="starButton" layoutX="220.0" layoutY="28.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="35.0" style="-fx-background-color: #808080;">
                <graphic>
                   <ImageView fx:id="starView" fitHeight="34.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
                      <image>
