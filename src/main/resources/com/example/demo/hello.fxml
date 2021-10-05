@@ -65,7 +65,7 @@
                   <Font size="31.0" />
                </font>
             </Label>
-<<<<<<< HEAD
+<<<<<<<
             <Button fx:id="SearchButton" contentDisplay="RIGHT" layoutX="14.0" layoutY="23.0" mnemonicParsing="false" onAction="#submit" prefHeight="46.0" prefWidth="117.0" stylesheets="@button1.css" text="Search" textFill="WHITE">
                <graphic>
                   <ImageView fx:id="searchView" fitHeight="26.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
