@@ -64,10 +64,9 @@ public class Background_controller implements Initializable {
 
     String input;
 
-    private final DictionaryCommandline dictionaryCommandline = new DictionaryCommandline();
-    private final DictionaryManagement dictionaryManagement =dictionaryCommandline.getDictionaryManagement();
-    private final Dictionary newDictionary = dictionaryManagement.getDictionary();
-    private final List<Word> newWords = newDictionary.getWords();
+    private final DictionaryManagement dictManagement =new DictionaryManagement();
+    private final Dictionary newDict = dictManagement.getDictionary();
+    private final List<Word> newWords = newDict.getWords();
     String currentWord;
 
     public void HandleImage(MouseEvent e){
@@ -78,10 +77,10 @@ public class Background_controller implements Initializable {
     public void submit(ActionEvent e){
         input = searchField.getText();
         try {
-            dictionaryCommandline.clear_SearchList();
+            dictManagement.clear_SearchList();
             DictionaryList.getItems().clear();
-            dictionaryCommandline.dictionarySeacher(input);
-            List<Word> searchWordList = dictionaryCommandline.getSearchList();
+            dictManagement.dictionarySeacher(input);
+            List<Word> searchWordList = dictManagement.getSearchList();
             for (Word newWord : searchWordList) {
                 DictionaryList.getItems().add(newWord.getWord_target());
             }
@@ -104,7 +103,7 @@ public class Background_controller implements Initializable {
     public void initialize(URL arg0, ResourceBundle arg1){
         try {
             newWords.clear();
-            dictionaryCommandline.dictionaryAdvanced();
+            dictManagement.insertFromFile();
             if(input == null){
                 DictionaryList.getItems().clear();
                 for (Word newWord : newWords) {
@@ -123,9 +122,5 @@ public class Background_controller implements Initializable {
         catch (IndexOutOfBoundsException e){
             e.printStackTrace();
         }
-
     }
-
-
-
 }

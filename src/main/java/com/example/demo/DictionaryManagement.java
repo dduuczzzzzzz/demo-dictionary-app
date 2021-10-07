@@ -1,13 +1,13 @@
 package com.example.demo;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class DictionaryManagement {
     private final Dictionary dictionary = new Dictionary();
+    private final List<Word> searchList = new ArrayList<>();
 
     private int binarySearch(List<Word> words, int l, int r, String wordToFind) {
         if (l <= r) {
@@ -21,21 +21,6 @@ public class DictionaryManagement {
             return binarySearch(words, mid + 1, r, wordToFind);
         }
         return -1;
-    }
-
-    public void insertFromCommandline() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("So luong tu can them: ");
-        int n = scanner.nextInt();
-        System.out.println("Nhap lan luot tu va nghia:");
-        for (int i = 0; i < n; i++) {
-            Scanner input = new Scanner(System.in);
-            String English = input.nextLine();
-            String translate = input.nextLine();
-            Word newWord = new Word(English, translate);
-            dictionary.insertWord(newWord);
-        }
-        dictionary.sortWords();
     }
 
     public void insertFromFile() {
@@ -66,7 +51,6 @@ public class DictionaryManagement {
 
     public void changeWord(){
         int index;
-        System.out.println("Nhap tu ban muon sua: ");
         Scanner nc = new Scanner(System.in);
         String wordtoChange = nc.nextLine();
         index = binarySearch(dictionary.getWords(), 0, dictionary.getWords().size() - 1, wordtoChange);
@@ -74,24 +58,30 @@ public class DictionaryManagement {
             System.out.println("Khong co tu ban muon sua!");
         }
         else {
-            System.out.println("Nhap y nghia ban muon sua: ");
             Scanner scanner = new Scanner(System.in);
             String newChange = scanner.nextLine();
             dictionary.getWords().get(index).setWord_explain(newChange);
         }
     }
 
-    public void dictionaryLookup() {
-        int index;
-        System.out.println("Nhap tu ban muon tim: ");
-        Scanner scanner = new Scanner(System.in);
-        String s = scanner.nextLine();
-        index = binarySearch(dictionary.getWords(), 0, dictionary.getWords().size() - 1, s);
-        if (index == -1) {
-            System.out.println("Khong co tu ban can tim");
+    public void dictionarySeacher(String input) {
+        for (Word words : dictionary.getWords()) {
+            if (words.getWord_target().contains(input)) {
+                searchList.add(words);
+            }
         }
-        else{
-            System.out.println(dictionary.getWords().get(index).getWord_explain());
+    }
+
+    public void clear_SearchList(){
+        searchList.clear();
+    }
+    public List<Word> getSearchList(){
+        return searchList;
+    }
+
+    public void printSearchList(){
+        for(Word words : searchList){
+            System.out.println(words.getWord_target() + "   " + words.getWord_explain());
         }
     }
 
