@@ -5,14 +5,6 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="592.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.Background_controller">
    <children>
@@ -23,7 +15,7 @@
                   <Font size="22.0" />
                </font>
             </TextField>
-            <ListView fx:id="DictionaryList" layoutX="14.0" layoutY="52.0" prefHeight="439.0" prefWidth="265.0" />
+            <ListView fx:id="DictionaryList" layoutX="14.0" layoutY="52.0" prefHeight="450.0" prefWidth="265.0" />
             <AnchorPane layoutX="299.0" layoutY="67.0" prefHeight="379.0" prefWidth="280.0">
                <children>
                   <Label fx:id="myLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="25.0" layoutY="14.0" prefHeight="420.0" prefWidth="255.0" style="-fx-background-color: #FFFFFF;">
@@ -49,14 +41,14 @@
             </Button>
             <Button fx:id="EditButton" layoutX="462.0" layoutY="29.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="52.0" stylesheets="@button2.css">
                <graphic>
-                  <ImageView fx:id="editView" fitHeight="37.0" fitWidth="37.0" onMouseClicked="#HandleImage" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="editView" fitHeight="37.0" fitWidth="37.0" onMouseClicked="#handleImage" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@image/edit.png" />
                      </image>
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="DeleteButton" layoutX="518.0" layoutY="29.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="52.0" stylesheets="@button2.css">
+            <Button fx:id="DeleteButton" layoutX="518.0" layoutY="29.0" mnemonicParsing="false" onAction="#removeWord" prefHeight="46.0" prefWidth="52.0" stylesheets="@button2.css">
                <graphic>
                   <ImageView fitHeight="35.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -69,7 +61,7 @@
       </AnchorPane>
       <AnchorPane prefHeight="73.0" prefWidth="600.0" style="-fx-background-color: #808080;">
          <children>
-            <Label layoutX="388.0" layoutY="10.0" text="Meow Teams" textFill="WHITE">
+            <Label layoutX="351.0" layoutY="10.0" text="Meow Teams" textFill="WHITE">
                <font>
                   <Font size="31.0" />
                </font>
@@ -104,7 +96,13 @@
                </graphic>
             </Button>
             <Label alignment="CENTER" contentDisplay="CENTER" layoutX="8.0" layoutY="6.0" prefHeight="17.0" prefWidth="191.0" text="Simple E-V dictionary" textFill="WHITE" />
+            <ImageView fitHeight="49.0" fitWidth="53.0" layoutX="533.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@image/logo.png" />
+               </image>
+            </ImageView>
          </children>
       </AnchorPane>
+      <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>

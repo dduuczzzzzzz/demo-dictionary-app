@@ -1,6 +1,6 @@
 package com.example.demo;
 
-public class Word {
+public class Word implements Comparable<Word>{
     private String word_target;
     private String word_explain;
 
@@ -23,5 +23,10 @@ public class Word {
     public Word(String English, String translate) {
         this.word_target = English;
         this.word_explain = translate;
+    }
+
+    @Override
+    public int compareTo(Word other){
+        return this.word_target.compareTo(other.getWord_target());
     }
 }

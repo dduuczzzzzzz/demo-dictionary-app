@@ -1,13 +1,11 @@
 package com.example.demo;
 
 import java.util.ArrayList;
-import java.util.Comparator;
+import java.util.Collections;
 import java.util.List;
 
 public class Dictionary {
     private final List<Word> words = new ArrayList<>();
-
-    Comparator<Word> wordComparator = Comparator.comparing(Word::getWord_target);
 
     public void insertWord(Word newWord) {
         words.add(newWord);
@@ -18,7 +16,7 @@ public class Dictionary {
     }
 
     public void sortWords() {
-        words.sort(wordComparator);
+        Collections.sort(words);
     }
 
     public List<Word> getWords() {

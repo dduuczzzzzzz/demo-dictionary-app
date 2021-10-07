@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class DictionaryManagement {
     private final Dictionary dictionary = new Dictionary();
     private final List<Word> searchList = new ArrayList<>();
-
+/*
     private int binarySearch(List<Word> words, int l, int r, String wordToFind) {
         if (l <= r) {
             int mid = l + (r - 1) / 2;
@@ -22,7 +22,7 @@ public class DictionaryManagement {
         }
         return -1;
     }
-
+*/
     public void insertFromFile() {
         try {
             File file;
@@ -41,27 +41,8 @@ public class DictionaryManagement {
         }
     }
 
-    public void removeWord() {
-        String removedWord;
-        Scanner input = new Scanner(System.in);
-        System.out.println("Nhap tu ban muon xoa: ");
-        removedWord = input.nextLine();
+    public void removeWord(String removedWord) {
         dictionary.removeWord(removedWord);
-    }
-
-    public void changeWord(){
-        int index;
-        Scanner nc = new Scanner(System.in);
-        String wordtoChange = nc.nextLine();
-        index = binarySearch(dictionary.getWords(), 0, dictionary.getWords().size() - 1, wordtoChange);
-        if (index == -1) {
-            System.out.println("Khong co tu ban muon sua!");
-        }
-        else {
-            Scanner scanner = new Scanner(System.in);
-            String newChange = scanner.nextLine();
-            dictionary.getWords().get(index).setWord_explain(newChange);
-        }
     }
 
     public void dictionarySeacher(String input) {
@@ -78,13 +59,6 @@ public class DictionaryManagement {
     public List<Word> getSearchList(){
         return searchList;
     }
-
-    public void printSearchList(){
-        for(Word words : searchList){
-            System.out.println(words.getWord_target() + "   " + words.getWord_explain());
-        }
-    }
-
     public Dictionary getDictionary() {
         return dictionary;
     }

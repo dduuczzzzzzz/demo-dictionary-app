@@ -1,8 +1,8 @@
-Hello	Xin chao
-Bye	Tam biet
-Dog	Cho
-Cat	Meo
-Thanks	Cam on
-Translate	Dich
-Transport 	Phuong tien
-Transform	Bien hinh
+Hello	Xin chào
+Bye	Tạm biệt
+Dog	Chó
+Cat	Mèo
+Thanks	Cảm ơn
+Translate	Dịch
+Transport	Phương tiện
+Transform	Biến hình
