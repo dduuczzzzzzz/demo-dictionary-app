@@ -11,8 +11,8 @@ public class Dictionary {
         words.add(newWord);
     }
 
-    public void removeWord(String removedWord) {
-        words.removeIf(i -> i.getWord_target().equals(removedWord));
+    public void removeWord(Word removedWord) {
+        words.remove(removedWord);
     }
 
     public void sortWords() {
