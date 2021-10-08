@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.effect.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
@@ -11,12 +10,12 @@
    <children>
       <AnchorPane layoutX="-1.0" layoutY="74.0" prefHeight="518.0" prefWidth="600.0" style="-fx-background-color: #ffebcd;">
          <children>
-            <TextField fx:id="searchField" alignment="CENTER" layoutX="14.0" prefHeight="48.0" prefWidth="219.0" promptText="Search a word">
+            <TextField fx:id="searchField" alignment="CENTER" layoutX="14.0" prefHeight="48.0" prefWidth="265.0" promptText="Search a word">
                <font>
                   <Font size="22.0" />
                </font>
             </TextField>
-            <ListView fx:id="DictionaryList" layoutX="14.0" layoutY="60.0" prefHeight="439.0" prefWidth="265.0" />
+            <ListView fx:id="DictionaryList" layoutX="14.0" layoutY="52.0" prefHeight="450.0" prefWidth="265.0" />
             <AnchorPane layoutX="299.0" layoutY="67.0" prefHeight="379.0" prefWidth="280.0">
                <children>
                   <Label fx:id="myLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="25.0" layoutY="14.0" prefHeight="420.0" prefWidth="255.0" style="-fx-background-color: #FFFFFF;">
@@ -31,7 +30,7 @@
                   <Font size="17.0" />
                </font>
             </Label>
-            <Button fx:id="SoundButton" layoutX="392.0" layoutY="30.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="35.0" style="-fx-background-color: #ffebcd;">
+            <Button fx:id="SoundButton" layoutX="392.0" layoutY="30.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="35.0" stylesheets="@button2.css">
                <graphic>
                   <ImageView fitHeight="38.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -40,16 +39,16 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="EditButton" layoutX="462.0" layoutY="29.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="52.0" style="-fx-background-color: #ffebcd;">
+            <Button fx:id="EditButton" layoutX="462.0" layoutY="29.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="52.0" stylesheets="@button2.css">
                <graphic>
-                  <ImageView fx:id="editView" fitHeight="50.0" fitWidth="35.0" onMouseClicked="#HandleImage" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="editView" fitHeight="37.0" fitWidth="37.0" onMouseClicked="#handleImage" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@image/edit.png" />
                      </image>
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="DeleteButton" layoutX="518.0" layoutY="29.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="52.0" style="-fx-background-color: #ffebcd;">
+            <Button fx:id="DeleteButton" layoutX="518.0" layoutY="29.0" mnemonicParsing="false" onAction="#removeWord" prefHeight="46.0" prefWidth="52.0" stylesheets="@button2.css">
                <graphic>
                   <ImageView fitHeight="35.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -60,20 +59,25 @@
             </Button>
          </children>
       </AnchorPane>
-      <AnchorPane prefHeight="66.0" prefWidth="600.0" style="-fx-background-color: #808080;">
+      <AnchorPane prefHeight="73.0" prefWidth="600.0" style="-fx-background-color: #808080;">
          <children>
-            <Label layoutX="14.0" layoutY="33.0" prefHeight="41.0" prefWidth="89.0" text="Search" textFill="WHITE">
-               <font>
-                  <Font size="28.0" />
-               </font>
-            </Label>
-            <Label layoutX="388.0" layoutY="10.0" text="Meow Teams" textFill="WHITE">
+            <Label layoutX="351.0" layoutY="10.0" text="Meow Teams" textFill="WHITE">
                <font>
                   <Font size="31.0" />
                </font>
             </Label>
-            <Button fx:id="SearchButton" layoutX="97.0" layoutY="33.0" mnemonicParsing="false" onAction="#submit" prefHeight="36.0" prefWidth="35.0" style="-fx-background-color: #808080;" />
-            <Button fx:id="addButton" layoutX="157.0" layoutY="33.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="35.0" style="-fx-background-color: #808080;">
+            <Button fx:id="SearchButton" alignment="CENTER" contentDisplay="RIGHT" layoutX="14.0" layoutY="31.0" mnemonicParsing="false" onAction="#submit" prefHeight="40.0" prefWidth="114.0" stylesheets="@button1.css" text="Search" textFill="WHITE">
+               <font>
+                  <Font size="19.0" />
+               </font>
+               <graphic>
+                  <ImageView fx:id="searchView" fitHeight="27.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@image/search.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
+            <Button fx:id="addButton" layoutX="157.0" layoutY="33.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="35.0" stylesheets="@button1.css">
                <graphic>
                   <ImageView fx:id="addView" fitHeight="28.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -92,9 +96,9 @@
                </graphic>
             </Button>
             <Label alignment="CENTER" contentDisplay="CENTER" layoutX="8.0" layoutY="6.0" prefHeight="17.0" prefWidth="191.0" text="Simple E-V dictionary" textFill="WHITE" />
-            <ImageView fx:id="searchView" fitHeight="27.0" fitWidth="27.0" layoutX="115.0" layoutY="39.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="49.0" fitWidth="53.0" layoutX="533.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@image/search.png" />
+                  <Image url="@image/logo.png" />
                </image>
             </ImageView>
          </children>
