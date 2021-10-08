@@ -1,4 +1,5 @@
 package com.example.demo;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -8,21 +9,26 @@ import java.util.Scanner;
 public class DictionaryManagement {
     private final Dictionary dictionary = new Dictionary();
     private final List<Word> searchList = new ArrayList<>();
-/*
-    private int binarySearch(List<Word> words, int l, int r, String wordToFind) {
-        if (l <= r) {
-            int mid = l + (r - 1) / 2;
-            if (words.get(mid).getWord_target().equals(wordToFind)) {
-                return mid;
+
+    /*
+        private int binarySearch(List<Word> words, int l, int r, String wordToFind) {
+            if (l <= r) {
+                int mid = l + (r - 1) / 2;
+                if (words.get(mid).getWord_target().equals(wordToFind)) {
+                    return mid;
+                }
+                if (words.get(mid).getWord_target().compareTo(wordToFind) > 0) {
+                    return binarySearch(words, l, mid - 1, wordToFind);
+                }
+                return binarySearch(words, mid + 1, r, wordToFind);
             }
-            if (words.get(mid).getWord_target().compareTo(wordToFind) > 0) {
-                return binarySearch(words, l, mid - 1, wordToFind);
-            }
-            return binarySearch(words, mid + 1, r, wordToFind);
+            return -1;
         }
-        return -1;
+    */
+    public void insertSingleWord(Word newWord) {
+        dictionary.insertWord(newWord);
     }
-*/
+
     public void insertFromFile() {
         try {
             File file;
@@ -41,7 +47,7 @@ public class DictionaryManagement {
         }
     }
 
-    public void removeWord(String removedWord) {
+    public void removeWord(Word removedWord) {
         dictionary.removeWord(removedWord);
     }
 
@@ -53,12 +59,14 @@ public class DictionaryManagement {
         }
     }
 
-    public void clear_SearchList(){
+    public void clear_SearchList() {
         searchList.clear();
     }
-    public List<Word> getSearchList(){
+
+    public List<Word> getSearchList() {
         return searchList;
     }
+
     public Dictionary getDictionary() {
         return dictionary;
     }
