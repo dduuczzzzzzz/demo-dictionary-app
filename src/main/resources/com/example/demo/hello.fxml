@@ -1,15 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="592.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.Background_controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="592.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.Background_controller">
    <children>
       <AnchorPane layoutX="-1.0" layoutY="74.0" prefHeight="518.0" prefWidth="600.0" style="-fx-background-color: #ffebcd;">
          <children>
@@ -19,41 +16,40 @@
                </font>
             </TextField>
             <ListView fx:id="DictionaryList" layoutX="14.0" layoutY="52.0" prefHeight="450.0" prefWidth="265.0" />
-            <AnchorPane layoutX="299.0" layoutY="52.0" prefHeight="450.0" prefWidth="280.0">
-               <children>
-                  <Label fx:id="myLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="15.0" layoutY="6.0" prefHeight="444.0" prefWidth="265.0" style="-fx-background-color: #FFFFFF;">
+            <ScrollPane layoutX="314.0" layoutY="58.0" prefHeight="443.0" prefViewportHeight="444.0" prefViewportWidth="265.0" prefWidth="256.0">
+               <content>
+                  <Label fx:id="myLabel" alignment="TOP_LEFT" contentDisplay="TOP" layoutX="15.0" layoutY="6.0" prefHeight="431.0" prefWidth="242.0" style="-fx-background-color: #FFFFFF;">
                      <font>
-                        <Font size="36.0" />
+                        <Font size="14.0" />
                      </font>
                   </Label>
-               </children>
-            </AnchorPane>
+               </content>
+            </ScrollPane>
             <Label layoutX="318.0" layoutY="17.0" text="Definition">
                <font>
                   <Font size="17.0" />
                </font>
             </Label>
-            <Button fx:id="SoundButton" layoutX="392.0" layoutY="6.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="35.0" stylesheets="@button2.css">
+            <Button fx:id="SoundButton" layoutX="392.0" layoutY="8.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="52.0" stylesheets="@button2.css">
                <graphic>
-                  <ImageView fitHeight="38.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="37.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@image/speaker.png" />
                      </image>
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="EditButton" layoutX="457.0" mnemonicParsing="false" onAction="#modifyWord" prefHeight="46.0" prefWidth="52.0" stylesheets="@button2.css">
+            <Button fx:id="EditButton" layoutX="458.0" layoutY="8.0" mnemonicParsing="false" onAction="#modifyWord" prefHeight="44.0" prefWidth="52.0" stylesheets="@button2.css">
                <graphic>
-                  <ImageView fx:id="editView" fitHeight="37.0" fitWidth="37.0" onMouseClicked="#handleImage" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="editView" fitHeight="37.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@image/edit.png" />
                      </image>
                   </ImageView>
-               </graphic>
-            </Button>
-            <Button fx:id="DeleteButton" layoutX="518.0" layoutY="7.0" mnemonicParsing="false" onAction="#removeWord" prefHeight="46.0" prefWidth="52.0" stylesheets="@button2.css">
+               </graphic></Button>
+            <Button fx:id="DeleteButton" layoutX="516.0" layoutY="8.0" mnemonicParsing="false" onAction="#removeWord" prefHeight="44.0" prefWidth="52.0" stylesheets="@button2.css">
                <graphic>
-                  <ImageView fitHeight="35.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="37.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@image/delete.png" />
                      </image>
@@ -98,7 +94,10 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="8.0" layoutY="6.0" prefHeight="17.0" prefWidth="191.0" text="Simple E-V dictionary" textFill="WHITE" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="17.0" layoutY="4.0" prefHeight="26.0" prefWidth="143.0" text="Simple E-V dictionary" textFill="WHITE">
+               <font>
+                  <Font size="13.0" />
+               </font></Label>
             <ImageView fitHeight="49.0" fitWidth="53.0" layoutX="533.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@image/logo.png" />

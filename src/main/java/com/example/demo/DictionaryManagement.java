@@ -10,21 +10,6 @@ public class DictionaryManagement {
     private final Dictionary dictionary = new Dictionary();
     private final List<Word> searchList = new ArrayList<>();
 
-    /*
-        private int binarySearch(List<Word> words, int l, int r, String wordToFind) {
-            if (l <= r) {
-                int mid = l + (r - 1) / 2;
-                if (words.get(mid).getWord_target().equals(wordToFind)) {
-                    return mid;
-                }
-                if (words.get(mid).getWord_target().compareTo(wordToFind) > 0) {
-                    return binarySearch(words, l, mid - 1, wordToFind);
-                }
-                return binarySearch(words, mid + 1, r, wordToFind);
-            }
-            return -1;
-        }
-    */
     public void insertSingleWord(Word newWord) {
         dictionary.insertWord(newWord);
     }

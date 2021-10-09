@@ -56,10 +56,6 @@ public class Background_controller implements Initializable {
     String input;
     Word currentWord;
 
-    public void handleImage() {
-        System.out.println("Click the image");
-    }
-
     // the list of words
     public void initialize(URL arg0, ResourceBundle arg1) {
         try {
@@ -72,8 +68,10 @@ public class Background_controller implements Initializable {
                 }
                 DictionaryList.getSelectionModel().selectedItemProperty().addListener((observableValue, s, t1) -> {
                     int index = DictionaryList.getSelectionModel().getSelectedIndex();
-                    currentWord = newWords.get(index);
-                    myLabel.setText(newWords.get(index).getWord_target() + "\n" + newWords.get(index).getWord_explain());
+                    if(index != -1) {
+                        currentWord = newWords.get(index);
+                        myLabel.setText(newWords.get(index).getWord_target() + "\n" + newWords.get(index).getWord_explain());
+                    }
                 });
             }
         } catch (IndexOutOfBoundsException e) {
@@ -94,8 +92,10 @@ public class Background_controller implements Initializable {
             }
             DictionaryList.getSelectionModel().selectedItemProperty().addListener((observableValue, s, t1) -> {
                 int index = DictionaryList.getSelectionModel().getSelectedIndex();
-                currentWord = searchWordList.get(index);
-                myLabel.setText(searchWordList.get(index).getWord_target() + "\n" + searchWordList.get(index).getWord_explain());
+                if(index != -1) {
+                    currentWord = searchWordList.get(index);
+                    myLabel.setText(searchWordList.get(index).getWord_target() + "\n" + searchWordList.get(index).getWord_explain());
+                }
             });
         } catch (IndexOutOfBoundsException ex) {
             ex.printStackTrace();
@@ -170,6 +170,14 @@ public class Background_controller implements Initializable {
     }
 
     public void modifyWord() {
+        if(currentWord == null){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("No word selected");
+            alert.showAndWait();
+            return;
+        }
         Dialog<ButtonType> dialog = new Dialog<>();
         dialog.setTitle("Modify Word");
         dialog.setHeaderText("Modify a word");

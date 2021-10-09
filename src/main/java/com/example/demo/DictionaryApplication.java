@@ -13,7 +13,7 @@ public class DictionaryApplication extends Application {
     public void start(Stage stage) {
         try{
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("hello.fxml")));
-            stage.setTitle("New Window");
+            stage.setTitle("MeowDict");
             stage.setResizable(false);
             Scene scene = new Scene(root);
             //scene.getStylesheets().add("foo/background.css");
