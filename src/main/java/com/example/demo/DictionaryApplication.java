@@ -16,7 +16,6 @@ public class DictionaryApplication extends Application {
             stage.setTitle("MeowDict");
             stage.setResizable(false);
             Scene scene = new Scene(root);
-            //scene.getStylesheets().add("foo/background.css");
             stage.setScene(scene);
             stage.show();
         }

@@ -42,6 +42,9 @@ public class Background_controller implements Initializable {
     private Label myLabel;
 
     @FXML
+    private Label def_label;
+
+    @FXML
     private TextField searchField;
 
     @FXML
@@ -75,7 +78,8 @@ public class Background_controller implements Initializable {
                 int index = DictionaryList.getSelectionModel().getSelectedIndex();
                 if(index > -1) {
                     currentWord = dictManagement.getSearchList().get(index);
-                    myLabel.setText(currentWord.getWord_target() + "\n" + currentWord.getWord_explain());
+                    def_label.setText(currentWord.getWord_target());
+                    myLabel.setText(currentWord.getWord_explain());
                 }
             });
 
@@ -234,6 +238,7 @@ public class Background_controller implements Initializable {
     public void ggTranslate() throws IOException {
         String text = searchField.getText();
         if(!Objects.equals(text, "")){
+            def_label.setText(text);
             myLabel.setText(Translator.translateEtoV(text));
         }
     }
@@ -244,10 +249,11 @@ public class Background_controller implements Initializable {
         VoiceManager voiceManager = VoiceManager.getInstance();
         voice = voiceManager.getVoice("kevin16");
         voice.allocate();
-
-        if(!Objects.equals(searchField.getText(),"")){
+        String text = def_label.getText();
+        //voice.speak(input);
+        if(!Objects.equals(text,"")){
             try{
-                voice.speak(searchField.getText());
+                voice.speak(text);
             }catch (Exception e){
                 System.out.println(e.getMessage());
             }

@@ -17,7 +17,7 @@ public class DictionaryManagement {
     public void insertFromFile() {
         try {
             File file;
-            file = new File("src/main/java/com/example/demo/dictionariess.txt");
+            file = new File("src/main/resources/com/example/demo/dictionariess.txt");
             Scanner sc = new Scanner(file);
             while (sc.hasNextLine()) {
                 String[] s = sc.nextLine().split("\t");
