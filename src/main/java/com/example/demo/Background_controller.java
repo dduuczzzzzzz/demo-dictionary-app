@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import com.example.demo.api.Translator;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
@@ -7,8 +8,10 @@ import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.*;
+import com.sun.speech.freetts.*;
 
 public class Background_controller implements Initializable {
     @FXML
@@ -56,10 +59,6 @@ public class Background_controller implements Initializable {
     String input;
     Word currentWord;
 
-    public void handleImage() {
-        System.out.println("Click the image");
-    }
-
     // the list of words
     public void initialize(URL arg0, ResourceBundle arg1) {
         try {
@@ -67,42 +66,39 @@ public class Background_controller implements Initializable {
             dictManagement.insertFromFile();
             if (input == null) {
                 DictionaryList.getItems().clear();
+                dictManagement.dictionarySeacher("");
                 for (Word newWord : newWords) {
                     DictionaryList.getItems().add(newWord.getWord_target());
                 }
-                DictionaryList.getSelectionModel().selectedItemProperty().addListener((observableValue, s, t1) -> {
-                    int index = DictionaryList.getSelectionModel().getSelectedIndex();
-                    if(index != -1){
-                        currentWord = newWords.get(index);
-                        myLabel.setText(newWords.get(index).getWord_target() + "\n" + newWords.get(index).getWord_explain());
-                    }
-                });
             }
+            DictionaryList.getSelectionModel().selectedItemProperty().addListener((observableValue, s, t1) -> {
+                int index = DictionaryList.getSelectionModel().getSelectedIndex();
+                if(index > -1) {
+                    currentWord = dictManagement.getSearchList().get(index);
+                    myLabel.setText(currentWord.getWord_target() + "\n" + currentWord.getWord_explain());
+                }
+            });
+
+            searchField.textProperty().addListener((observableValue, oldValue, newValue) ->{
+                dictManagement.clear_SearchList();
+                DictionaryList.getItems().clear();
+                dictManagement.dictionarySeacher(newValue);
+                List<Word> searchWordList = dictManagement.getSearchList();
+                for(Word word: searchWordList){
+                    DictionaryList.getItems().add(word.getWord_target());
+                }
+            });
         } catch (IndexOutOfBoundsException e) {
             e.printStackTrace();
         }
     }
 
-    // make a box to search word
-    public void submit() {
-        input = searchField.getText();
-        try {
-            dictManagement.clear_SearchList();
-            DictionaryList.getItems().clear();
-            dictManagement.dictionarySeacher(input);
-            List<Word> searchWordList = dictManagement.getSearchList();
-            for (Word newWord : searchWordList) {
-                DictionaryList.getItems().add(newWord.getWord_target());
-            }
-            DictionaryList.getSelectionModel().selectedItemProperty().addListener((observableValue, s, t1) -> {
-                int index = DictionaryList.getSelectionModel().getSelectedIndex();
-                if(index != -1) {
-                    currentWord = searchWordList.get(index);
-                    myLabel.setText(searchWordList.get(index).getWord_target() + "\n" + searchWordList.get(index).getWord_explain());
-                }
-            });
-        } catch (IndexOutOfBoundsException ex) {
-            ex.printStackTrace();
+    private void updateSearchList(){
+        dictManagement.clear_SearchList();
+        DictionaryList.getItems().clear();
+        dictManagement.dictionarySeacher(searchField.getText());
+        for (Word word: dictManagement.getSearchList()){
+            DictionaryList.getItems().add(word.getWord_target());
         }
     }
 
@@ -114,8 +110,8 @@ public class Background_controller implements Initializable {
         Optional<ButtonType> result =  alert.showAndWait();
         if(result.get() ==ButtonType.OK){
             dictManagement.removeWord(currentWord);
+            updateSearchList();
         }
-        submit();
     }
 
     public void addAWord() {
@@ -162,7 +158,7 @@ public class Background_controller implements Initializable {
                 alert.setHeaderText(null);
                 alert.setContentText("Word added successfully");
                 alert.showAndWait();
-                submit();
+                updateSearchList();
             } else {
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setTitle("Error");
@@ -174,6 +170,14 @@ public class Background_controller implements Initializable {
     }
 
     public void modifyWord() {
+        if(currentWord == null){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("No word selected");
+            alert.showAndWait();
+            return;
+        }
         Dialog<ButtonType> dialog = new Dialog<>();
         dialog.setTitle("Modify Word");
         dialog.setHeaderText("Modify a word");
@@ -222,7 +226,30 @@ public class Background_controller implements Initializable {
                 alert.setHeaderText(null);
                 alert.setContentText("Word modified");
                 alert.showAndWait();
-                submit();
+                updateSearchList();
+            }
+        }
+    }
+
+    public void ggTranslate() throws IOException {
+        String text = searchField.getText();
+        if(!Objects.equals(text, "")){
+            myLabel.setText(Translator.translateEtoV(text));
+        }
+    }
+
+    public void speak(){
+        System.setProperty("freetts.voices","com.sun.speech.freetts.en.us.cmu_us_kal.KevinVoiceDirectory");
+        Voice voice;
+        VoiceManager voiceManager = VoiceManager.getInstance();
+        voice = voiceManager.getVoice("kevin16");
+        voice.allocate();
+
+        if(!Objects.equals(searchField.getText(),"")){
+            try{
+                voice.speak(searchField.getText());
+            }catch (Exception e){
+                System.out.println(e.getMessage());
             }
         }
     }
