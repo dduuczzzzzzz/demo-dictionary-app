@@ -39,7 +39,7 @@ public class Background_controller implements Initializable {
     private ImageView editView;
 
     @FXML
-    private Label myLabel;
+    private TextArea meaningArea;
 
     @FXML
     private Label def_label;
@@ -79,7 +79,7 @@ public class Background_controller implements Initializable {
                 if(index > -1) {
                     currentWord = dictManagement.getSearchList().get(index);
                     def_label.setText(currentWord.getWord_target());
-                    myLabel.setText(currentWord.getWord_explain());
+                    meaningArea.setText(currentWord.getWord_explain());
                 }
             });
 
@@ -112,7 +112,7 @@ public class Background_controller implements Initializable {
         alert.setHeaderText(null);
         alert.setContentText("Remove the word: " + currentWord.getWord_target() +" ?");
         Optional<ButtonType> result =  alert.showAndWait();
-        if(result.get() ==ButtonType.OK){
+        if(result.isPresent() && result.get() ==ButtonType.OK){
             dictManagement.removeWord(currentWord);
             updateSearchList();
         }
@@ -146,7 +146,7 @@ public class Background_controller implements Initializable {
         dialog.getDialogPane().setContent(grid);
 
         Optional<ButtonType> result = dialog.showAndWait();
-        if (result.get() == ButtonType.OK) {
+        if (result.isPresent() && result.get() == ButtonType.OK) {
             Word newWord = new Word(word.getText(), meaning.getText());
             if (Objects.equals(word.getText(), "")) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -212,7 +212,7 @@ public class Background_controller implements Initializable {
 
         Optional<ButtonType> result = dialog.showAndWait();
 
-        if(result.get() == ButtonType.OK){
+        if(result.isPresent() && result.get() == ButtonType.OK){
             if(Objects.equals(word.getText(),"")){
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error");
@@ -239,7 +239,7 @@ public class Background_controller implements Initializable {
         String text = searchField.getText();
         if(!Objects.equals(text, "")){
             def_label.setText(text);
-            myLabel.setText(Translator.translateEtoV(text));
+            meaningArea.setText(Translator.translateEtoV(text));
         }
     }
 
