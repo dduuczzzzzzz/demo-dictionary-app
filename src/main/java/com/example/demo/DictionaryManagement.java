@@ -59,10 +59,10 @@ public class DictionaryManagement {
                     }
                     word.setWord_target(s2);
 
-                    /*if (part.length < 2) {
-                        word.setPhonetics("");
+                    if (part.length < 2) {
+                        word.add_to_explain("");
                     } else
-                        word.setPhonetics("/" + part[1]);*/
+                        word.add_to_explain("/" + part[1] +"\n");
                     while (itr.hasNext()) {
                         String p1 = itr.next();
                         if (!p1.startsWith("@")) {
