@@ -26,23 +26,22 @@ public class Background_controller implements Initializable {
     @FXML
     private TextField searchField;
 
-
-
     private final DictionaryManagement dictManagement = new DictionaryManagement();
     List<String> searchResult = new ArrayList<>();
     Word currentWord = new Word();
 
-    // the list of words
     public void initialize(URL arg0, ResourceBundle arg1) {
         try {
-            dictManagement.getWords().clear();
+            //load data from file
             dictManagement.loadFromFile();
-            DictionaryList.getItems().clear();
 
+            //show list of words
             searchResult = dictManagement.searchWord("");
             for(String word: searchResult) {
                 DictionaryList.getItems().add(word);
             }
+
+            //show word meaning when click on a word in word list
             DictionaryList.getSelectionModel().selectedItemProperty().addListener((observableValue, s, t1) -> {
                 int index = DictionaryList.getSelectionModel().getSelectedIndex();
                 if(index != -1) {
@@ -54,6 +53,7 @@ public class Background_controller implements Initializable {
                 }
             });
 
+            // suggest words when type in search field
             searchField.textProperty().addListener((observableValue, oldValue, newValue) ->{
                 DictionaryList.getItems().clear();
                 searchResult.clear();
@@ -67,6 +67,7 @@ public class Background_controller implements Initializable {
         }
     }
 
+    //set currentWord explain when unknown
     public void setCurrentWordExplain (){
         int indexInWords = Collections.binarySearch(dictManagement.getWords(),currentWord);
         if (indexInWords != -1){
@@ -123,7 +124,6 @@ public class Background_controller implements Initializable {
                 alert.showAndWait();
             } else if (Collections.binarySearch(dictManagement.getWords(), newWord) < 0) {
                 dictManagement.insertSingleWord(newWord);
-                dictManagement.sortWords();
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Success");
                 alert.setHeaderText(null);
@@ -187,9 +187,8 @@ public class Background_controller implements Initializable {
                 alert.showAndWait();
             }
             else{
-                int index = Collections.binarySearch(dictManagement.getWords(), currentWord);
-                dictManagement.modifyWord(index,word.getText(),meaning.getText());
-                dictManagement.sortWords();
+                //int index = Collections.binarySearch(dictManagement.getWords(), currentWord);
+                dictManagement.modifyWord(currentWord,word.getText(),meaning.getText());
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Success");
                 alert.setHeaderText(null);

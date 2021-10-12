@@ -63,9 +63,10 @@ public class DictionaryManagement {
         dictionary.removeWord(removedWord);
     }
 
-    public void modifyWord(int index, String word_target, String word_explain) {
-        dictionary.getWords().get(index).setWord_target(word_target);
-        dictionary.getWords().get(index).setWord_explain(word_explain);
+    public void modifyWord(Word oldWord, String word_target, String word_explain) {
+        removeWord(oldWord);
+        Word word = new Word(word_target,word_explain);
+        insertSingleWord(word);
     }
 
     public void sortWords() {
