@@ -66,7 +66,8 @@ public class Background_controller implements Initializable {
     public void initialize(URL arg0, ResourceBundle arg1) {
         try {
             newWords.clear();
-            dictManagement.insertFromFile();
+            //dictManagement.insertFromFile();
+            dictManagement.loadFromFile();
             if (input == null) {
                 DictionaryList.getItems().clear();
                 dictManagement.dictionarySeacher("");

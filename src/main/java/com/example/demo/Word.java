@@ -2,7 +2,7 @@ package com.example.demo;
 
 public class Word implements Comparable<Word>{
     private String word_target;
-    private String word_explain;
+    private String word_explain = "";
 
     public void setWord_target(String word_target) {
         this.word_target = word_target;
@@ -10,6 +10,12 @@ public class Word implements Comparable<Word>{
 
     public void setWord_explain(String word_explain) {
         this.word_explain = word_explain;
+    }
+
+    public void add_to_explain(String add){
+        if(add!= null){
+            this.word_explain += add;
+        }
     }
 
     public String getWord_target() {
@@ -22,6 +28,10 @@ public class Word implements Comparable<Word>{
 
     public Word(String English){
         this.word_target = English;
+    }
+
+    public Word(){
+
     }
 
     public Word(String English, String translate) {
