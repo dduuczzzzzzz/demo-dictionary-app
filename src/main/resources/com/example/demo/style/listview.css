@@ -1,0 +1,11 @@
+.scroll-bar:vertical{
+    -fx-pref-width: 13;
+    -fx-background-color: transparent;
+    -fx-background-radius: 2em;
+}
+
+.scroll-bar:vertical .track{
+    -fx-background-color :transparent;
+    -fx-border-color :transparent;
+    -fx-background-radius : 2.0em;
+}

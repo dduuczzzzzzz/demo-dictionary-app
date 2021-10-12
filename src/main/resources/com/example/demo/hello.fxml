@@ -6,7 +6,6 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="592.0" prefWidth="810.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.Background_controller">
    <children>
       <AnchorPane layoutY="62.0" prefHeight="531.0" prefWidth="810.0" style="-fx-background-color: #f5f5f5;">
@@ -16,10 +15,10 @@
                   <Font name="High Tower Text" size="22.0" />
                </font>
             </TextField>
-            <ListView fx:id="DictionaryList" layoutX="69.0" layoutY="71.0" prefHeight="435.0" prefWidth="323.0" />
-            <AnchorPane layoutX="382.0" layoutY="8.0" prefHeight="505.0" prefWidth="425.0">
+            <ListView fx:id="DictionaryList" layoutX="69.0" layoutY="71.0" prefHeight="451.0" prefWidth="323.0" stylesheets="@style/listview.css" />
+            <AnchorPane layoutX="400.0" layoutY="8.0" prefHeight="521.0" prefWidth="403.0">
                <children>
-                  <TextArea fx:id="meaningArea" editable="false" layoutX="18.0" layoutY="7.0" prefHeight="492.0" prefWidth="407.0" stylesheets="@style/meaningArea.css" AnchorPane.bottomAnchor="6.0" AnchorPane.leftAnchor="18.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="7.0">
+                  <TextArea fx:id="meaningArea" editable="false" layoutX="18.0" layoutY="7.0" prefHeight="507.0" prefWidth="404.0" stylesheets="@style/meaningArea.css" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="7.0">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
@@ -33,12 +32,12 @@
                         <Font size="20.0" />
                      </font>
                   </TextArea>
-                  <Label layoutX="42.0" layoutY="18.0" prefHeight="26.0" prefWidth="87.0" text="Definition">
+                  <Label layoutX="25.0" layoutY="18.0" prefHeight="26.0" prefWidth="87.0" text="Definition">
                      <font>
                         <Font name="High Tower Text" size="19.0" />
                      </font>
                   </Label>
-                  <Button layoutX="129.0" layoutY="9.0" mnemonicParsing="false" onAction="#speak" prefHeight="41.0" prefWidth="35.0" stylesheets="@style/button2.css">
+                  <Button layoutX="117.0" layoutY="9.0" mnemonicParsing="false" onAction="#speak" prefHeight="41.0" prefWidth="35.0" stylesheets="@style/button2.css">
                      <graphic>
                         <ImageView fitHeight="38.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -47,7 +46,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button layoutX="314.0" layoutY="10.0" mnemonicParsing="false" onAction="#modifyWord" prefHeight="40.0" prefWidth="34.0" stylesheets="@style/button2.css">
+                  <Button layoutX="283.0" layoutY="10.0" mnemonicParsing="false" onAction="#modifyWord" prefHeight="40.0" prefWidth="34.0" stylesheets="@style/button2.css">
                      <graphic>
                         <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -56,7 +55,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button layoutX="365.0" layoutY="10.0" mnemonicParsing="false" onAction="#removeWord" prefHeight="40.0" prefWidth="45.0" stylesheets="@style/button2.css">
+                  <Button layoutX="342.0" layoutY="10.0" mnemonicParsing="false" onAction="#removeWord" prefHeight="40.0" prefWidth="45.0" stylesheets="@style/button2.css">
                      <graphic>
                         <ImageView fitHeight="35.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -65,22 +64,22 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Label fx:id="def_label" layoutX="42.0" layoutY="58.0" prefHeight="40.0" prefWidth="312.0">
-                     <font>
-                        <Font name="High Tower Text" size="28.0" />
-                     </font>
-                  </Label>
-                  <ImageView fitHeight="64.0" fitWidth="80.0" layoutX="336.0" layoutY="446.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView blendMode="SRC_ATOP" fitHeight="64.0" fitWidth="80.0" layoutX="336.0" layoutY="446.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@image/black-kitten1.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="75.0" fitWidth="98.0" layoutX="18.0" layoutY="446.0" pickOnBounds="true" preserveRatio="true">
+                  <Label fx:id="def_label" layoutX="26.0" layoutY="58.0" prefHeight="53.0" prefWidth="358.0">
+                     <font>
+                        <Font name="High Tower Text" size="28.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="75.0" fitWidth="98.0" layoutX="4.0" layoutY="446.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@image/black-kitten3.png" />
                      </image>
                   </ImageView>
-                  <Button layoutX="245.0" layoutY="10.0" mnemonicParsing="false" onAction="#ggTranslate" prefHeight="26.0" prefWidth="41.0" stylesheets="@style/button2.css">
+                  <Button layoutX="220.0" layoutY="10.0" mnemonicParsing="false" onAction="#ggTranslate" prefHeight="26.0" prefWidth="41.0" stylesheets="@style/button2.css">
                      <graphic>
                         <ImageView fitHeight="36.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
                            <image>

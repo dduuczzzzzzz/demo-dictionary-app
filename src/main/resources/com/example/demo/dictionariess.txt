@@ -1,8 +1,0 @@
-Hello	Xin chào
-Bye	Tạm biệt
-Dog	Chó
-Cat	Mèo
-Thanks	Cảm ơn
-Translate	Dịch
-Transport	Phương tiện
-Transform	Biến hình

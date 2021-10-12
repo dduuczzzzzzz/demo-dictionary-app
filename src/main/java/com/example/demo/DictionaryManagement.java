@@ -16,7 +16,6 @@ public class DictionaryManagement {
 
     public void loadFromFile() {
         try {
-            //words = new Vector<>();
             Path path = Paths.get("src/main/resources/com/example/demo/advancedDict.txt");
             List<String> dataList = Files.readAllLines(path);
             ListIterator<String> itr = dataList.listIterator();
@@ -42,7 +41,6 @@ public class DictionaryManagement {
                     while (itr.hasNext()) {
                         String p1 = itr.next();
                         if (!p1.startsWith("@")) {
-                            //word.setWord_explain(p1);
                             word.add_to_explain(p1);
                             word.add_to_explain("\n");
                         } else {

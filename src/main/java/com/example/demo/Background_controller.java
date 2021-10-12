@@ -36,10 +36,7 @@ public class Background_controller implements Initializable {
             dictManagement.loadFromFile();
 
             //show list of words
-            searchResult = dictManagement.searchWord("");
-            for(String word: searchResult) {
-                DictionaryList.getItems().add(word);
-            }
+            updateSearchResult("");
 
             //show word meaning when click on a word in word list
             DictionaryList.getSelectionModel().selectedItemProperty().addListener((observableValue, s, t1) -> {
@@ -53,7 +50,7 @@ public class Background_controller implements Initializable {
                 }
             });
 
-            // suggest words when type in search field
+            // suggest words while typing in search field
             searchField.textProperty().addListener((observableValue, oldValue, newValue) ->{
                 DictionaryList.getItems().clear();
                 searchResult.clear();
@@ -64,6 +61,17 @@ public class Background_controller implements Initializable {
             });
         } catch (IndexOutOfBoundsException e) {
             e.printStackTrace();
+        }
+    }
+
+    //update search result list
+    public void updateSearchResult(String prefix){
+        DictionaryList.getItems().clear();
+        meaningArea.clear();
+        def_label.setText("");
+        searchResult = dictManagement.searchWord(prefix);
+        for(String word: searchResult) {
+            DictionaryList.getItems().add(word);
         }
     }
 
@@ -83,6 +91,7 @@ public class Background_controller implements Initializable {
         Optional<ButtonType> result =  alert.showAndWait();
         if(result.isPresent() && result.get() ==ButtonType.OK){
             dictManagement.removeWord(currentWord);
+            updateSearchResult(searchField.getText());
         }
     }
 
@@ -114,8 +123,10 @@ public class Background_controller implements Initializable {
         dialog.getDialogPane().setContent(grid);
 
         Optional<ButtonType> result = dialog.showAndWait();
+
         if (result.isPresent() && result.get() == ButtonType.OK) {
             Word newWord = new Word(word.getText(), meaning.getText());
+
             if (Objects.equals(word.getText(), "")) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error");
@@ -129,6 +140,7 @@ public class Background_controller implements Initializable {
                 alert.setHeaderText(null);
                 alert.setContentText("Word added successfully");
                 alert.showAndWait();
+                updateSearchResult(searchField.getText());
             } else {
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setTitle("Error");
@@ -187,17 +199,18 @@ public class Background_controller implements Initializable {
                 alert.showAndWait();
             }
             else{
-                //int index = Collections.binarySearch(dictManagement.getWords(), currentWord);
                 dictManagement.modifyWord(currentWord,word.getText(),meaning.getText());
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Success");
                 alert.setHeaderText(null);
                 alert.setContentText("Word modified");
                 alert.showAndWait();
+                updateSearchResult(searchField.getText());
             }
         }
     }
 
+    //Use Google Translate to translate text in def_label
     public void ggTranslate() throws IOException {
         String text = searchField.getText();
         if(!Objects.equals(text, "")){
@@ -206,6 +219,7 @@ public class Background_controller implements Initializable {
         }
     }
 
+    //Use Freetts to speak def_label content
     public void speak(){
         System.setProperty("freetts.voices","com.sun.speech.freetts.en.us.cmu_us_kal.KevinVoiceDirectory");
         Voice voice;
@@ -213,7 +227,6 @@ public class Background_controller implements Initializable {
         voice = voiceManager.getVoice("kevin16");
         voice.allocate();
         String text = def_label.getText();
-        //voice.speak(input);
         if(!Objects.equals(text,"")){
             try{
                 voice.speak(text);
