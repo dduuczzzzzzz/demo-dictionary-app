@@ -5,7 +5,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 
 import java.io.IOException;
@@ -14,29 +13,9 @@ import java.util.*;
 import com.sun.speech.freetts.*;
 
 public class Background_controller implements Initializable {
-    @FXML
-    private Button DeleteButton;
 
     @FXML
     private ListView<String> DictionaryList;
-
-    @FXML
-    private Button EditButton;
-
-    @FXML
-    private Button SearchButton;
-
-    @FXML
-    private Button SoundButton;
-
-    @FXML
-    private Button addButton;
-
-    @FXML
-    private ImageView addView;
-
-    @FXML
-    private ImageView editView;
 
     @FXML
     private TextArea meaningArea;
@@ -47,50 +26,40 @@ public class Background_controller implements Initializable {
     @FXML
     private TextField searchField;
 
-    @FXML
-    private ImageView searchView;
 
-    @FXML
-    private Button starButton;
-
-    @FXML
-    private ImageView starView;
 
     private final DictionaryManagement dictManagement = new DictionaryManagement();
-    private final Dictionary newDict = dictManagement.getDictionary();
-    private final List<Word> newWords = newDict.getWords();
-    String input;
-    Word currentWord;
+    List<String> searchResult = new ArrayList<>();
+    Word currentWord = new Word();
 
     // the list of words
     public void initialize(URL arg0, ResourceBundle arg1) {
         try {
-            newWords.clear();
-            //dictManagement.insertFromFile();
+            dictManagement.getWords().clear();
             dictManagement.loadFromFile();
-            if (input == null) {
-                DictionaryList.getItems().clear();
-                dictManagement.dictionarySeacher("");
-                for (Word newWord : newWords) {
-                    DictionaryList.getItems().add(newWord.getWord_target());
-                }
+            DictionaryList.getItems().clear();
+
+            searchResult = dictManagement.searchWord("");
+            for(String word: searchResult) {
+                DictionaryList.getItems().add(word);
             }
             DictionaryList.getSelectionModel().selectedItemProperty().addListener((observableValue, s, t1) -> {
                 int index = DictionaryList.getSelectionModel().getSelectedIndex();
-                if(index > -1) {
-                    currentWord = dictManagement.getSearchList().get(index);
+                if(index != -1) {
+                    String wordTarget = DictionaryList.getItems().get(index);
+                    currentWord.setWord_target(wordTarget);
                     def_label.setText(currentWord.getWord_target());
+                    setCurrentWordExplain();
                     meaningArea.setText(currentWord.getWord_explain());
                 }
             });
 
             searchField.textProperty().addListener((observableValue, oldValue, newValue) ->{
-                dictManagement.clear_SearchList();
                 DictionaryList.getItems().clear();
-                dictManagement.dictionarySeacher(newValue);
-                List<Word> searchWordList = dictManagement.getSearchList();
-                for(Word word: searchWordList){
-                    DictionaryList.getItems().add(word.getWord_target());
+                searchResult.clear();
+                searchResult.addAll(dictManagement.searchWord(newValue));
+                for(String word: searchResult){
+                    DictionaryList.getItems().add(word);
                 }
             });
         } catch (IndexOutOfBoundsException e) {
@@ -98,12 +67,10 @@ public class Background_controller implements Initializable {
         }
     }
 
-    private void updateSearchList(){
-        dictManagement.clear_SearchList();
-        DictionaryList.getItems().clear();
-        dictManagement.dictionarySeacher(searchField.getText());
-        for (Word word: dictManagement.getSearchList()){
-            DictionaryList.getItems().add(word.getWord_target());
+    public void setCurrentWordExplain (){
+        int indexInWords = Collections.binarySearch(dictManagement.getWords(),currentWord);
+        if (indexInWords != -1){
+            currentWord.setWord_explain(dictManagement.getWords().get(indexInWords).getWord_explain());
         }
     }
 
@@ -115,7 +82,6 @@ public class Background_controller implements Initializable {
         Optional<ButtonType> result =  alert.showAndWait();
         if(result.isPresent() && result.get() ==ButtonType.OK){
             dictManagement.removeWord(currentWord);
-            updateSearchList();
         }
     }
 
@@ -155,15 +121,14 @@ public class Background_controller implements Initializable {
                 alert.setHeaderText(null);
                 alert.setContentText("Word field is empty");
                 alert.showAndWait();
-            } else if (Collections.binarySearch(newWords, newWord) < 0) {
+            } else if (Collections.binarySearch(dictManagement.getWords(), newWord) < 0) {
                 dictManagement.insertSingleWord(newWord);
-                newDict.sortWords();
+                dictManagement.sortWords();
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Success");
                 alert.setHeaderText(null);
                 alert.setContentText("Word added successfully");
                 alert.showAndWait();
-                updateSearchList();
             } else {
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setTitle("Error");
@@ -222,16 +187,14 @@ public class Background_controller implements Initializable {
                 alert.showAndWait();
             }
             else{
-                int index = Collections.binarySearch(newWords, currentWord);
-                newWords.get(index).setWord_target(word.getText());
-                newWords.get(index).setWord_explain(meaning.getText());
-                newDict.sortWords();
+                int index = Collections.binarySearch(dictManagement.getWords(), currentWord);
+                dictManagement.modifyWord(index,word.getText(),meaning.getText());
+                dictManagement.sortWords();
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Success");
                 alert.setHeaderText(null);
                 alert.setContentText("Word modified");
                 alert.showAndWait();
-                updateSearchList();
             }
         }
     }

@@ -26,12 +26,8 @@ public class Word implements Comparable<Word>{
         return word_explain;
     }
 
-    public Word(String English){
-        this.word_target = English;
-    }
-
     public Word(){
-
+        word_target = "";
     }
 
     public Word(String English, String translate) {

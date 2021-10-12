@@ -1,39 +1,17 @@
 package com.example.demo;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
-import java.util.Scanner;
 
 public class DictionaryManagement {
     private final Dictionary dictionary = new Dictionary();
-    private final List<Word> searchList = new ArrayList<>();
 
     public void insertSingleWord(Word newWord) {
         dictionary.insertWord(newWord);
-    }
-
-    public void insertFromFile() {
-        try {
-            File file;
-            file = new File("src/main/resources/com/example/demo/dictionariess.txt");
-            Scanner sc = new Scanner(file);
-            while (sc.hasNextLine()) {
-                String[] s = sc.nextLine().split("\t");
-                String English = s[0];
-                String translate = s[1];
-                Word newWord = new Word(English, translate);
-                dictionary.insertWord(newWord);
-            }
-            dictionary.sortWords();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+        sortWords();
     }
 
     public void loadFromFile() {
@@ -42,27 +20,25 @@ public class DictionaryManagement {
             Path path = Paths.get("src/main/resources/com/example/demo/advancedDict.txt");
             List<String> dataList = Files.readAllLines(path);
             ListIterator<String> itr = dataList.listIterator();
-            //code to read data from file to Vector
-            Word word = new Word();
-            int count = 0;
+
+            Word word;
             while (itr.hasNext()) {
                 String p = itr.next();
 
                 if (p.startsWith("@")) {
-                    count++;
                     word = new Word();
                     String[] part = p.split("/", 2);
 
                     String s2 = part[0].substring(1).trim();
                     if (s2.startsWith("'") || s2.startsWith("-") || s2.startsWith("(")) {
-                        s2 = s2.substring(1, s2.length());
+                        s2 = s2.substring(1);
                     }
                     word.setWord_target(s2);
 
                     if (part.length < 2) {
                         word.add_to_explain("");
                     } else
-                        word.add_to_explain("/" + part[1] +"\n");
+                        word.add_to_explain("/" + part[1] + "\n");
                     while (itr.hasNext()) {
                         String p1 = itr.next();
                         if (!p1.startsWith("@")) {
@@ -77,7 +53,7 @@ public class DictionaryManagement {
                     }
                 }
             }
-
+            sortWords();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -87,23 +63,24 @@ public class DictionaryManagement {
         dictionary.removeWord(removedWord);
     }
 
-    public void dictionarySeacher(String input) {
-        for (Word words : dictionary.getWords()) {
-            if (words.getWord_target().contains(input)) {
-                searchList.add(words);
-            }
-        }
+    public void modifyWord(int index, String word_target, String word_explain) {
+        dictionary.getWords().get(index).setWord_target(word_target);
+        dictionary.getWords().get(index).setWord_explain(word_explain);
     }
 
-    public void clear_SearchList() {
-        searchList.clear();
+    public void sortWords() {
+        dictionary.sortWords();
     }
 
-    public List<Word> getSearchList() {
-        return searchList;
+    public List<String> searchWord(String prefix) {
+        return dictionary.wordSuggest(prefix);
     }
 
     public Dictionary getDictionary() {
         return dictionary;
+    }
+
+    public List<Word> getWords() {
+        return getDictionary().getWords();
     }
 }

@@ -1,0 +1,58 @@
+.text-area {
+    -fx-background-insets: 0;
+    -fx-background-color: transparent, white, transparent, white;
+}
+
+.text-area .content {
+    -fx-background-color: transparent, white, transparent, white;
+}
+
+.text-area:focused .content {
+    -fx-background-color: transparent, white, transparent, white;
+}
+
+.text-area:focused {
+    -fx-highlight-fill: #7ecfff;
+}
+
+.text-area .content {
+    -fx-text-fill: gray;
+    -fx-highlight-fill: #7ecfff;
+}
+
+.text-area .scroll-bar:vertical{
+    -fx-pref-width: 12;
+    -fx-background-color: transparent;
+    -fx-background-radius: 2em;
+}
+
+.text-area .scroll-bar:horizontal {
+    -fx-pref-height: 12;
+    -fx-background-color: transparent;
+    -fx-background-radius: 2em;
+}
+
+
+.text-area .scroll-bar:vertical .increment-arrow,
+.text-area .scroll-bar:vertical .decrement-arrow,
+.text-area .scroll-bar:horizontal .increment-arrow,
+.text-area .scroll-bar:horizontal .decrement-arrow{
+    -fx-shape: "";
+    -fx-padding:0.0;
+}
+
+.text-area.scroll-bar:horizontal .increment-button ,
+.text-area.scroll-bar:horizontal .decrement-button {
+    -fx-background-color :transparent;
+    -fx-background-radius : 0.0em;
+    -fx-padding :0.0 0.0 10.0 0.0;
+}
+
+.text-area.scroll-bar:vertical .increment-button ,
+.text-area.scroll-bar:vertical .decrement-button {
+    -fx-background-color :transparent;
+    -fx-background-radius : 0.0em;
+    -fx-padding :0.0 10.0 0.0 0.0;
+}
+
+
