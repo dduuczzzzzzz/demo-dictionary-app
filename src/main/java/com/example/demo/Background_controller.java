@@ -84,11 +84,13 @@ public class Background_controller implements Initializable {
     }
 
     public void removeWord() {
+        //show confirmation dialog
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Confirmation");
         alert.setHeaderText(null);
         alert.setContentText("Remove the word: " + currentWord.getWord_target() +" ?");
         Optional<ButtonType> result =  alert.showAndWait();
+        //remove word on confirm
         if(result.isPresent() && result.get() ==ButtonType.OK){
             dictManagement.removeWord(currentWord);
             updateSearchResult(searchField.getText());
@@ -96,6 +98,7 @@ public class Background_controller implements Initializable {
     }
 
     public void addAWord() {
+        //construct add word dialog
         Dialog<ButtonType> dialog = new Dialog<>();
         dialog.setTitle("Add a word");
         dialog.setHeaderText("Add a new word to dictionary");
@@ -124,16 +127,19 @@ public class Background_controller implements Initializable {
 
         Optional<ButtonType> result = dialog.showAndWait();
 
+        //on confirmation
         if (result.isPresent() && result.get() == ButtonType.OK) {
             Word newWord = new Word(word.getText(), meaning.getText());
-
+            //alert if word field is empty
             if (Objects.equals(word.getText(), "")) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error");
                 alert.setHeaderText(null);
                 alert.setContentText("Word field is empty");
                 alert.showAndWait();
-            } else if (Collections.binarySearch(dictManagement.getWords(), newWord) < 0) {
+            }
+            //add word
+            else if (Collections.binarySearch(dictManagement.getWords(), newWord) < 0) {
                 dictManagement.insertSingleWord(newWord);
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Success");
@@ -141,7 +147,9 @@ public class Background_controller implements Initializable {
                 alert.setContentText("Word added successfully");
                 alert.showAndWait();
                 updateSearchResult(searchField.getText());
-            } else {
+            }
+            //alert if word is present in dictionary
+            else {
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setTitle("Error");
                 alert.setHeaderText(null);
@@ -152,6 +160,7 @@ public class Background_controller implements Initializable {
     }
 
     public void modifyWord() {
+        //alert if user hasn't selected any word
         if(currentWord == null){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
@@ -160,6 +169,7 @@ public class Background_controller implements Initializable {
             alert.showAndWait();
             return;
         }
+        //construct modify word dialog
         Dialog<ButtonType> dialog = new Dialog<>();
         dialog.setTitle("Modify Word");
         dialog.setHeaderText("Modify a word");
@@ -190,7 +200,9 @@ public class Background_controller implements Initializable {
 
         Optional<ButtonType> result = dialog.showAndWait();
 
+        //on confirmation
         if(result.isPresent() && result.get() == ButtonType.OK){
+            //alert if word field is empty
             if(Objects.equals(word.getText(),"")){
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error");
@@ -198,6 +210,7 @@ public class Background_controller implements Initializable {
                 alert.setContentText("Word field is empty");
                 alert.showAndWait();
             }
+            //modify word and show result
             else{
                 dictManagement.modifyWord(currentWord,word.getText(),meaning.getText());
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -219,7 +232,7 @@ public class Background_controller implements Initializable {
         }
     }
 
-    //Use Freetts to speak def_label content
+    //Use Freetts to speak def_label content if not empty
     public void speak(){
         System.setProperty("freetts.voices","com.sun.speech.freetts.en.us.cmu_us_kal.KevinVoiceDirectory");
         Voice voice;

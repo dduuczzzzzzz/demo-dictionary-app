@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
@@ -45,6 +46,9 @@
                            </image>
                         </ImageView>
                      </graphic>
+                     <tooltip>
+                        <Tooltip text="Speak" />
+                     </tooltip>
                   </Button>
                   <Button layoutX="283.0" layoutY="10.0" mnemonicParsing="false" onAction="#modifyWord" prefHeight="40.0" prefWidth="34.0" stylesheets="@style/button2.css">
                      <graphic>
@@ -54,6 +58,9 @@
                            </image>
                         </ImageView>
                      </graphic>
+                     <tooltip>
+                        <Tooltip text="Modify this word" />
+                     </tooltip>
                   </Button>
                   <Button layoutX="342.0" layoutY="10.0" mnemonicParsing="false" onAction="#removeWord" prefHeight="40.0" prefWidth="45.0" stylesheets="@style/button2.css">
                      <graphic>
@@ -63,6 +70,21 @@
                            </image>
                         </ImageView>
                      </graphic>
+                     <tooltip>
+                        <Tooltip text="Delete this word" />
+                     </tooltip>
+                  </Button>
+                  <Button layoutX="220.0" layoutY="10.0" mnemonicParsing="false" onAction="#ggTranslate" prefHeight="26.0" prefWidth="41.0" stylesheets="@style/button2.css">
+                     <graphic>
+                        <ImageView fitHeight="36.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@image/ggtrans.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <tooltip>
+                        <Tooltip text="Use Google Translate" />
+                     </tooltip>
                   </Button>
                   <ImageView blendMode="SRC_ATOP" fitHeight="64.0" fitWidth="80.0" layoutX="336.0" layoutY="446.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -79,15 +101,6 @@
                         <Image url="@image/black-kitten3.png" />
                      </image>
                   </ImageView>
-                  <Button layoutX="220.0" layoutY="10.0" mnemonicParsing="false" onAction="#ggTranslate" prefHeight="26.0" prefWidth="41.0" stylesheets="@style/button2.css">
-                     <graphic>
-                        <ImageView fitHeight="36.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@image/ggtrans.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
                </children>
             </AnchorPane>
             <ImageView fitHeight="75.0" fitWidth="60.0" layoutX="332.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
@@ -117,10 +130,7 @@
                         <Image url="@image/starred.png" />
                      </image>
                   </ImageView>
-                  <Button contentDisplay="RIGHT" layoutX="3.0" layoutY="163.0" mnemonicParsing="false" onAction="#addAWord" prefHeight="40.0" prefWidth="51.0" stylesheets="@style/button1.css" textFill="WHITE">
-                     <font>
-                        <Font name="High Tower Text" size="19.0" />
-                     </font>
+                  <Button contentDisplay="RIGHT" layoutX="5.0" layoutY="163.0" mnemonicParsing="false" onAction="#addAWord" prefHeight="40.0" prefWidth="51.0" stylesheets="@style/button1.css" textFill="WHITE">
                      <graphic>
                         <ImageView fitHeight="28.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -128,6 +138,9 @@
                            </image>
                         </ImageView>
                      </graphic>
+                     <tooltip>
+                        <Tooltip text="Add a word" />
+                     </tooltip>
                   </Button>
                   <Button alignment="CENTER" contentDisplay="RIGHT" layoutX="4.0" layoutY="92.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="51.0" stylesheets="@style/button1.css" textFill="WHITE">
                      <font>
