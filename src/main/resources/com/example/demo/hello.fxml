@@ -19,7 +19,7 @@
             <ListView fx:id="DictionaryList" layoutX="69.0" layoutY="71.0" prefHeight="451.0" prefWidth="323.0" stylesheets="@style/listview.css" />
             <AnchorPane layoutX="400.0" layoutY="8.0" prefHeight="521.0" prefWidth="403.0">
                <children>
-                  <TextArea fx:id="meaningArea" editable="false" layoutX="18.0" layoutY="7.0" prefHeight="507.0" prefWidth="404.0" stylesheets="@style/meaningArea.css" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="7.0">
+                  <TextArea fx:id="meaningArea" editable="false" layoutX="18.0" layoutY="7.0" prefHeight="507.0" prefWidth="404.0" stylesheets="@style/meaningArea.css" wrapText="true" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="7.0">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
@@ -91,11 +91,15 @@
                         <Image url="@image/black-kitten1.png" />
                      </image>
                   </ImageView>
-                  <Label fx:id="def_label" layoutX="26.0" layoutY="58.0" prefHeight="53.0" prefWidth="358.0">
-                     <font>
-                        <Font name="High Tower Text" size="28.0" />
-                     </font>
-                  </Label>
+                  <ScrollPane hbarPolicy="NEVER" layoutX="26.0" layoutY="58.0" pannable="true" prefHeight="48.0" prefViewportHeight="53.0" prefViewportWidth="358.0" prefWidth="360.0" style="-fx-background-color: transparent;" vbarPolicy="NEVER" vmax="0.0">
+                     <content>
+                        <Label fx:id="def_label" layoutX="26.0" layoutY="58.0" prefHeight="53.0" textOverrun="CLIP">
+                           <font>
+                              <Font size="27.0" />
+                           </font>
+                        </Label>
+                     </content>
+                  </ScrollPane>
                   <ImageView fitHeight="75.0" fitWidth="98.0" layoutX="4.0" layoutY="446.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@image/black-kitten3.png" />
