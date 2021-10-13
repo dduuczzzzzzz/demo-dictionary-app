@@ -225,11 +225,20 @@ public class Background_controller implements Initializable {
 
     //Use Google Translate to translate text in def_label
     public void ggTranslate() throws IOException {
-        String text = searchField.getText();
-        if(!Objects.equals(text, "")){
-            def_label.setText(text);
-            meaningArea.setText(Translator.translateEtoV(text));
+        if(DictionaryList.getSelectionModel().selectedItemProperty().getValue() != null){
+            String text = def_label.getText();
+            if(!Objects.equals(text, "")){
+                meaningArea.setText(Translator.translateEtoV(text));
+            }
         }
+        else{
+            String text_input = searchField.getText();
+            if(!Objects.equals(text_input, "")){
+                def_label.setText(text_input);
+                meaningArea.setText(Translator.translateEtoV(text_input));
+            }
+        }
+
     }
 
     //Use Freetts to speak def_label content if not empty
