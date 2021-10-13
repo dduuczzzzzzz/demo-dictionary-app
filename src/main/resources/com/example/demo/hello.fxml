@@ -27,7 +27,7 @@
                         <Insets />
                      </VBox.margin>
                      <padding>
-                        <Insets bottom="50.0" left="10.0" right="10.0" top="110.0" />
+                        <Insets bottom="20.0" left="10.0" right="10.0" top="110.0" />
                      </padding>
                      <font>
                         <Font size="20.0" />
@@ -91,9 +91,9 @@
                         <Image url="@image/black-kitten1.png" />
                      </image>
                   </ImageView>
-                  <ScrollPane hbarPolicy="NEVER" layoutX="26.0" layoutY="58.0" pannable="true" prefHeight="48.0" prefViewportHeight="53.0" prefViewportWidth="358.0" prefWidth="360.0" style="-fx-background-color: transparent;" vbarPolicy="NEVER" vmax="0.0">
+                  <ScrollPane hbarPolicy="NEVER" layoutX="26.0" layoutY="58.0" pannable="true" prefHeight="48.0" prefViewportHeight="53.0" prefViewportWidth="358.0" prefWidth="360.0" stylesheets="@style/defpane.css" vbarPolicy="NEVER" vmax="0.0">
                      <content>
-                        <Label fx:id="def_label" layoutX="26.0" layoutY="58.0" prefHeight="53.0" textOverrun="CLIP">
+                        <Label fx:id="def_label" layoutX="26.0" layoutY="58.0" prefHeight="53.0" style="-fx-background-color: transparent;" textOverrun="CLIP">
                            <font>
                               <Font size="27.0" />
                            </font>
