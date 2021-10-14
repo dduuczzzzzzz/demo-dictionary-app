@@ -1,6 +1,6 @@
 package com.example.demo;
 
-import com.example.demo.api.Trie;
+import com.example.demo.utils.Trie;
 
 import java.util.ArrayList;
 import java.util.Collections;

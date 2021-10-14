@@ -14,7 +14,7 @@ public class Word implements Comparable<Word>{
 
     public void add_to_explain(String add){
         if(add!= null){
-            this.word_explain += add;
+            this.word_explain = this.word_explain + add+'\n';
         }
     }
 
@@ -28,6 +28,10 @@ public class Word implements Comparable<Word>{
 
     public Word(){
         word_target = "";
+    }
+
+    public Word(String English){
+        this.word_target = English;
     }
 
     public Word(String English, String translate) {

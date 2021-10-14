@@ -1,10 +1,12 @@
 package com.example.demo;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
-import java.util.ListIterator;
+import java.util.Objects;
 
 public class DictionaryManagement {
     private final Dictionary dictionary = new Dictionary();
@@ -14,47 +16,30 @@ public class DictionaryManagement {
         sortWords();
     }
 
-    public void loadFromFile() {
-        try {
-            Path path = Paths.get("src/main/resources/com/example/demo/advancedDict.txt");
-            List<String> dataList = Files.readAllLines(path);
-            ListIterator<String> itr = dataList.listIterator();
+    public void loadFromFile() throws IOException {
+        Path path = Paths.get("src/main/resources/com/example/demo/dictData.txt");
+        List<String> dataList = Files.readAllLines(path);
+        Word newWord = new Word();
 
-            Word word;
-            while (itr.hasNext()) {
-                String p = itr.next();
-
-                if (p.startsWith("@")) {
-                    word = new Word();
-                    String[] part = p.split("/", 2);
-
-                    String s2 = part[0].substring(1).trim();
-                    if (s2.startsWith("'") || s2.startsWith("-") || s2.startsWith("(")) {
-                        s2 = s2.substring(1);
-                    }
-                    word.setWord_target(s2);
-
-                    if (part.length < 2) {
-                        word.add_to_explain("");
-                    } else
-                        word.add_to_explain("/" + part[1] + "\n");
-                    while (itr.hasNext()) {
-                        String p1 = itr.next();
-                        if (!p1.startsWith("@")) {
-                            word.add_to_explain(p1);
-                            word.add_to_explain("\n");
-                        } else {
-                            dictionary.insertWord(word);
-                            itr.previous();
-                            break;
-                        }
-                    }
-                }
+        for(int i=1;i<=dataList.size();i++){
+            if(i == dataList.size()){
+                dictionary.insertWord(newWord);
+                break;
             }
-            sortWords();
-        } catch (Exception e) {
-            e.printStackTrace();
+            if (Objects.equals(dataList.get(i),"\n") || Objects.equals(dataList.get(i),"" )) continue;
+            if(Objects.equals(dataList.get(i),"$")) continue;
+            if(Objects.equals(dataList.get(i - 1), "$")){
+                if(i>1) {
+                    dictionary.insertWord(newWord);
+                }
+                newWord = new Word();
+                newWord.setWord_target(dataList.get(i));
+            }
+            else{
+                newWord.add_to_explain(dataList.get(i));
+            }
         }
+        sortWords();
     }
 
     public void removeWord(Word removedWord) {
@@ -67,6 +52,22 @@ public class DictionaryManagement {
         insertSingleWord(word);
     }
 
+    //Backup old data and save current data
+    public void exportDataToFile() throws IOException {
+        Path data = Paths.get("src/main/resources/com/example/demo/dictData.txt");
+        Path backup = Paths.get("src/main/resources/com/example/demo/dictDataBackup.txt");
+        Files.delete(backup);
+        Files.copy(data,backup);
+
+        PrintWriter pw = new PrintWriter("src/main/resources/com/example/demo/dictData.txt");
+        for(Word curr : getWords()){
+            pw.println("$");
+            pw.println(curr.getWord_target());
+            pw.println(curr.getWord_explain());
+            pw.flush();
+        }
+    }
+
     public void sortWords() {
         dictionary.sortWords();
     }
@@ -75,11 +76,7 @@ public class DictionaryManagement {
         return dictionary.wordSuggest(prefix);
     }
 
-    public Dictionary getDictionary() {
-        return dictionary;
-    }
-
     public List<Word> getWords() {
-        return getDictionary().getWords();
+        return dictionary.getWords();
     }
 }
