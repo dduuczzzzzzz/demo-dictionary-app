@@ -257,6 +257,7 @@ public class UI_controller implements Initializable {
         }
     }
 
+    //execute when exit app
     public void exportDataOnExit() throws IOException {
         dictManagement.exportDataToFile();
     }

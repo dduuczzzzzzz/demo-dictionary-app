@@ -9,12 +9,6 @@ public class Trie {
         root = new TrieNode();
     }
 
-    public Trie(List<String> words) {
-        root = new TrieNode();
-        for (String word : words)
-            insertWord(word);
-    }
-
     public void insertWord(String word){
         root.insert(word);
     }
@@ -28,20 +22,6 @@ public class Trie {
             curr=curr.children.get(word.charAt(i));
         }
         curr.isWord = false;
-    }
-
-    public boolean find(String prefix, boolean exact) {
-        TrieNode lastNode = root;
-        for (char c : prefix.toCharArray()) {
-            lastNode = lastNode.children.get(c);
-            if (lastNode == null)
-                return false;
-        }
-        return !exact || lastNode.isWord;
-    }
-
-    public boolean find(String prefix) {
-        return find(prefix, false);
     }
 
     private void suggestHelper(TrieNode root, List<String> list, StringBuilder curr) {
