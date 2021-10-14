@@ -21,21 +21,20 @@ public class DictionaryManagement {
         List<String> dataList = Files.readAllLines(path);
         Word newWord = new Word();
 
-        for(int i=1;i<=dataList.size();i++){
-            if(i == dataList.size()){
+        for (int i = 1; i <= dataList.size(); i++) {
+            if (i == dataList.size()) {
                 dictionary.insertWord(newWord);
                 break;
             }
-            if (Objects.equals(dataList.get(i),"\n") || Objects.equals(dataList.get(i),"" )) continue;
-            if(Objects.equals(dataList.get(i),"$")) continue;
-            if(Objects.equals(dataList.get(i - 1), "$")){
-                if(i>1) {
+            if (Objects.equals(dataList.get(i), "\n") || Objects.equals(dataList.get(i), "")) continue;
+            if (Objects.equals(dataList.get(i), "$")) continue;
+            if (Objects.equals(dataList.get(i - 1), "$")) {
+                if (i > 1) {
                     dictionary.insertWord(newWord);
                 }
                 newWord = new Word();
                 newWord.setWord_target(dataList.get(i));
-            }
-            else{
+            } else {
                 newWord.add_to_explain(dataList.get(i));
             }
         }
@@ -48,7 +47,7 @@ public class DictionaryManagement {
 
     public void modifyWord(Word oldWord, String word_target, String word_explain) {
         removeWord(oldWord);
-        Word word = new Word(word_target,word_explain);
+        Word word = new Word(word_target, word_explain);
         insertSingleWord(word);
     }
 
@@ -56,11 +55,13 @@ public class DictionaryManagement {
     public void exportDataToFile() throws IOException {
         Path data = Paths.get("src/main/resources/com/example/demo/dictData.txt");
         Path backup = Paths.get("src/main/resources/com/example/demo/dictDataBackup.txt");
-        Files.delete(backup);
-        Files.copy(data,backup);
+        if (Files.exists(backup)) {
+            Files.delete(backup);
+        }
+        Files.copy(data, backup);
 
         PrintWriter pw = new PrintWriter("src/main/resources/com/example/demo/dictData.txt");
-        for(Word curr : getWords()){
+        for (Word curr : getWords()) {
             pw.println("$");
             pw.println(curr.getWord_target());
             pw.println(curr.getWord_explain());
