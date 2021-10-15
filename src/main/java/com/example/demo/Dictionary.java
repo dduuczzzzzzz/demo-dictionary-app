@@ -16,7 +16,8 @@ public class Dictionary {
     }
 
     public void removeWord(Word removedWord) {
-        words.remove(removedWord);
+        int index = Collections.binarySearch(words,removedWord);
+        words.remove(index);
         wordsTrie.deleteWord(removedWord.getWord_target());
     }
 

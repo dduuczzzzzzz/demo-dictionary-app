@@ -61,7 +61,7 @@ public class DictionaryManagement {
         Files.copy(data, backup);
 
         PrintWriter pw = new PrintWriter("src/main/resources/com/example/demo/dictData.txt");
-        for (Word curr : getWords()) {
+        for (Word curr : dictionary.getWords()) {
             pw.println("$");
             pw.println(curr.getWord_target());
             pw.println(curr.getWord_explain());
